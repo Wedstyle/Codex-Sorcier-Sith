@@ -302,7 +302,7 @@ li:hover,
 .photoEinhar {
   display: block;
   margin: 0 auto 20px auto; /* Centre l'image et ajoute de l'espace en dessous */
-  max-width: 25%;
+  max-width: 26%;
   height: auto;
   border-radius: 8px; /* Optionnel : arrondit un peu les angles de la photo */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Optionnel : ajoute une ombre sous la photo */
