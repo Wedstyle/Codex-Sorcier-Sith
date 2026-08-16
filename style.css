@@ -19,7 +19,8 @@ body {
 /* ================================
    TITRES (style Codex ancien)
    ================================ */
-h2, h3 {
+h2,
+h3 {
   font-family: "Cinzel Decorative", serif;
   color: #c9a34e; /* doré ancien */
   text-shadow: 0 0 8px rgba(201, 163, 78, 0.6);
@@ -75,7 +76,9 @@ h3 {
   letter-spacing: 1px;
   cursor: pointer;
   padding: 6px 14px;
-  transition: color 0.3s ease, text-shadow 0.3s ease;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
 }
 
 .liNav a:hover {
@@ -106,8 +109,9 @@ div[class*="pair"] {
   background-color: rgba(25, 25, 25, 0.95);
   border: 1px solid rgba(201, 163, 78, 0.4);
   border-radius: 6px;
-  box-shadow: inset 0 0 20px rgba(201, 163, 78, 0.15),
-              0 0 20px rgba(0, 0, 0, 0.8);
+  box-shadow:
+    inset 0 0 20px rgba(201, 163, 78, 0.15),
+    0 0 20px rgba(0, 0, 0, 0.8);
   padding: 25px;
   margin: 30px auto;
   width: 80%;
@@ -118,14 +122,16 @@ div[class*="-sorcier"]:hover,
 div[class*="-sith"]:hover,
 div[class*="-spheres"]:hover,
 div[class*="pair"]:hover {
-  box-shadow: inset 0 0 25px rgba(185, 74, 47, 0.4),
-              0 0 25px rgba(201, 163, 78, 0.6);
+  box-shadow:
+    inset 0 0 25px rgba(185, 74, 47, 0.4),
+    0 0 25px rgba(201, 163, 78, 0.6);
 }
 
 /* ================================
    LISTES & TEXTES
    ================================ */
-ul, p {
+ul,
+p {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -142,7 +148,9 @@ li,
   border-left: 5px solid #b94a2f;
   font-style: italic;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
 }
 
 li:hover,
@@ -219,8 +227,12 @@ li:hover,
     padding: 6px 12px;
   }
 
-  h2 { font-size: 2em; }
-  h3 { font-size: 1.4em; }
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1.4em;
+  }
 
   div[class*="-sorcier"],
   div[class*="-sith"],
@@ -242,8 +254,12 @@ li:hover,
     padding: 5px 10px;
   }
 
-  h2 { font-size: 1.7em; }
-  h3 { font-size: 1.3em; }
+  h2 {
+    font-size: 1.7em;
+  }
+  h3 {
+    font-size: 1.3em;
+  }
 
   div[class*="-sorcier"],
   div[class*="-sith"],
@@ -251,4 +267,43 @@ li:hover,
   div[class*="pair"] {
     width: 95%;
   }
+}
+/* ================================
+   CENTRHAGE DU BLOC D'ACCUEIL
+   ================================ */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Aligne tout parfaitement au centre horizontalement */
+  justify-content: center;
+  width: 100%;
+}
+
+.title1 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 3em;
+  color: #b94a2f; /* Rouge Sith */
+  text-shadow: 0 0 10px rgba(185, 74, 47, 0.6);
+  margin-top: 40px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.title2 {
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgba(201, 163, 78, 0.4);
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.photoEinhar {
+  display: block;
+  margin: 0 auto 20px auto; /* Centre l'image et ajoute de l'espace en dessous */
+  max-width: 25%;
+  height: auto;
+  border-radius: 8px; /* Optionnel : arrondit un peu les angles de la photo */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Optionnel : ajoute une ombre sous la photo */
 }
