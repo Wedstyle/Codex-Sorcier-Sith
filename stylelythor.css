@@ -1,115 +1,244 @@
-/* Fond noir sans image */
+/* --- CONCEPT TERMINAL HOLOCRON SITH (VERSION MATTE) --- */
 
+@import url("https://googleapis.com");
 
 body {
-    background-color: #000000;
-    color: #e0e0e0;
-    font-family: 'Rajdhani', sans-serif;
-
-
-
-
-
-    line-height: 1.7;
-    margin: 0;
-    padding: 0;
+  background-color: #050506;
+  color: #c8cbd0; /* Gris technique mat, très reposant */
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 40px 20px;
 }
 
-/* Animation fade-in */
-@keyframes fadeIn {
-    0% { opacity: 0; transform: translateY(30px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Glow atténué pour les titres */
-h1, h2 {
-    color: #990000;
-    text-shadow: 0 0 6px #660000, 0 0 12px #330000;
-    animation: fadeIn 1s ease-in-out forwards;
-}
-
+/* Titre principal sobre */
 h1 {
-    font-size: 2.8em;
-    text-align: center;
-    padding: 30px 20px 10px;
-    border-bottom: 2px solid #550000;
-    margin-bottom: 30px;
+  font-size: 2.4em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 0px;
+  padding-bottom: 20px;
 }
 
+/* Petit sous-titre de statut technique */
+h1::after {
+  content: " // ARCHIVES_SITH.DAT_ACCÈS_AUTORISÉ";
+  display: block;
+  font-size: 0.3em;
+  color: #991b1b; /* Rouge brique mat */
+  letter-spacing: 2px;
+  margin-top: 10px;
+  font-weight: 400;
+}
+
+/* Titres de sous-sections épurés */
 h2 {
-    font-size: 1.8em;
-    margin-top: 40px;
-    border-left: 6px solid #800000;
-    padding-left: 12px;
+  font-size: 1.4em;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #ffffff;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #1f2937;
+  padding-bottom: 8px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Fade-in sur les sections */
+/* Petit carré rouge brique devant chaque titre H2 */
+h2::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #991b1b;
+}
+
+/* Sections principales transformées en modules de données mats */
 .section {
-    margin: 40px auto;
-    padding: 20px 0;
-    border-top: 1px solid #333333;
-    border-bottom: 1px solid #333333;
-    background: rgba(20, 0, 0, 0.3);
-    max-width: 1000px;
-    animation: fadeIn 1.5s ease-in-out forwards;
-    opacity: 0;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 24px;
+  background-color: #0f1115;
+  border: 1px solid #1f2937;
+  border-radius: 4px;
 }
 
-/* Alternance pour un effet léger */
-.section:nth-child(even) {
-    background: rgba(50, 0, 0, 0.3);
-}
-
-/* Texte important en pulsation rouge tamisé */
-@keyframes pulseGlow {
-    0%   { text-shadow: 0 0 4px #660000; }
-    50%  { text-shadow: 0 0 10px #800000; }
-    100% { text-shadow: 0 0 4px #660000; }
-}
-
+/* Mise en avant simple des mots importants (Sans aucun fond coloré ni lueur) */
 strong {
-    color: #cc3333;
-    font-weight: bold;
-    animation: pulseGlow 2s infinite;
+  color: #b91c1c; /* Rouge mat fixe */
+  font-weight: 600;
 }
 
 p {
-    max-width: 900px;
-    margin: 0 auto 20px auto;
-    padding: 0 20px;
-    font-size: 1.1em;
+  margin: 0 0 16px 0;
+  font-size: 1.05em;
+  color: #9ca3af;
 }
 
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* L'effigie de Darth Lythor intégrée comme un dossier d'identité */
+/* --- ANIMATION DE L'EFFIGIE (VERSION MATTE ET DISCRÈTE) --- */
+
+/* --- CODE DE L'IMAGE SÉCURISÉ (VISIBLE EN PERMANENCE) --- */
+
+/* --- ANIMATION DE LÉVITATION + ZOOM AU SURVOL --- */
+
+/* --- ANIMATION DE LÉVITATION + GROS ZOOM NET --- */
+
+/* --- CODE DU GROS ZOOM SÉCURISÉ --- */
+
+@keyframes levitationCalme {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.photoLythor {
+  display: block;
+  /* Ajout de marges de sécurité pour donner de la place au gros zoom */
+  margin: 40px auto;
+  width: 240px;
+  height: auto;
+  border: 1px solid #1f2937;
+  border-radius: 4px;
+  padding: 6px;
+  background-color: #0f1115;
+
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+
+  filter: grayscale(30%) brightness(90%);
+  animation: levitationCalme 5s ease-in-out infinite;
+
+  /* Préparation de la transition */
+  transition:
+    transform 0.3s ease-in-out,
+    filter 0.3s ease;
+
+  /* Indique au navigateur que cet élément va bouger pour optimiser l'affichage */
+  will-change: transform;
+}
+
+/* AU SURVOL (HOVER) */
+.photoLythor:hover {
+  /* On fige l'animation pour appliquer le zoom proprement */
+  animation: none !important;
+
+  /* GROS ZOOM FORCÉ (1.25 = +25%) */
+  transform: scale(1.25) !important;
+
+  /* Fait passer l'image par-dessus tous les autres textes de la page */
+  position: relative;
+  z-index: 999;
+
+  filter: grayscale(0%) brightness(100%) !important;
+  cursor: pointer;
+}
+
+/* --- GRILLE DE CONNAISSANCES MINI-CARTES D'ARCHIVES --- */
+.grille-savoirs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+/* Design des fiches de données */
+.carte-savoir {
+  background-color: #0f1115;
+  border-left: 3px solid #374151; /* Ligne d'accentuation à gauche grise */
+  border-top: 1px solid #1f2937;
+  border-right: 1px solid #1f2937;
+  border-bottom: 1px solid #1f2937;
+  border-radius: 0 4px 4px 0;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Alternance automatique mate sur les fiches de données */
+.carte-savoir:nth-child(even) {
+  border-left-color: #991b1b; /* Accentuation rouge brique mate */
+}
+
+/* Le Code de la Peur prend toute la largeur en bas */
+.carte-large {
+  grid-column: span 3;
+  border-left-color: #991b1b;
+}
+
+.bloc-peur p {
+  white-space: pre-line;
+  line-height: 1.5;
+  text-align: center;
+  font-style: italic;
+  color: #c8cbd0;
+}
+
+/* Intitulés des fiches */
+.carte-savoir h5 {
+  margin: 0;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+/* Contenu des fiches */
+.carte-savoir p {
+  margin: 0;
+  font-size: 0.95em;
+  color: #9ca3af;
+}
+
+/* Liens du terminal */
 a {
-    color: #cc3333;
-    text-decoration: none;
+  color: #b91c1c;
+  text-decoration: none;
+  font-weight: 600;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
+/* Style de sélection de texte sobre */
 ::selection {
-    background: #800000;
-    color: #ffffff;
+  background: #991b1b;
+  color: #ffffff;
 }
 
-/* Style pour l’image de Darth Lythor */
-.photoLythor {
-    display: block;
-    margin: 0 auto 40px auto;
-    width: 280px;
-    height: auto;
-    border: 3px solid #440000;
-    border-radius: 8px;
-    box-shadow: 0 0 15px #550000, 0 0 30px rgba(120, 0, 0, 0.3);
-    animation: fadeIn 2s ease-in-out forwards, floatGlow 4s ease-in-out infinite;
-    opacity: 0;
+/* --- ADAPTATION ÉCRANS --- */
+@media (max-width: 900px) {
+  .grille-savoirs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .carte-large {
+    grid-column: span 2;
+  }
 }
 
-/* Effet de léger flottement et glow tamisé */
-@keyframes floatGlow {
-    0%   { transform: translateY(0px) scale(1); box-shadow: 0 0 15px #550000; }
-    50%  { transform: translateY(-5px) scale(1.02); box-shadow: 0 0 25px #800000; }
-    100% { transform: translateY(0px) scale(1); box-shadow: 0 0 15px #550000; }
+@media (max-width: 600px) {
+  .grille-savoirs {
+    grid-template-columns: 1fr;
+  }
+  .carte-large {
+    grid-column: span 1;
+  }
 }

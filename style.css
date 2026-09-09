@@ -307,3 +307,184 @@ li:hover,
   border-radius: 8px; /* Optionnel : arrondit un peu les angles de la photo */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Optionnel : ajoute une ombre sous la photo */
 }
+
+/* Container principal imitant le salon de discussion */
+.chat-container {
+  background-color: #313338; /* Couleur de fond Discord Dark */
+  padding: 16px;
+  font-family: "GG Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #dbdee1;
+  display: flex;
+  gap: 16px;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+/* Avatar de l'utilisateur (cercle à gauche) */
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    #00b0f4,
+    #005f9e
+  ); /* Simule l'image de profil */
+  flex-shrink: 0;
+}
+
+/* Contenu du message */
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Ligne d'en-tête (Pseudo + Badge + Heure) */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.chat-author {
+  color: #f23f43; /* Rouge pour le nom Darwin */
+  font-weight: 600;
+}
+
+.chat-badge {
+  background-color: #2b2d31;
+  color: #f2f3f5;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chat-time {
+  color: #949ba4;
+  font-size: 12px;
+}
+
+/* Le texte du poème avec les retours à la ligne respectés */
+.chat-text {
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-line; /* Respecte fidèlement les sauts de ligne */
+  color: #dbdee1;
+  margin: 0;
+}
+
+/* Le conteneur principal */
+.code-sorcier {
+  position: relative; /* Indispensable pour la signature en bas à droite */
+  min-height: 350px; /* Ajustez cette hauteur selon la taille actuelle de votre bloc */
+
+  /* Activation du centrage vertical automatique */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement le titre et le poème */
+  align-items: center; /* Centre horizontalement le titre et le poème */
+
+  padding: 40px 20px; /* Espace interne pour respirer */
+  box-sizing: border-box;
+}
+
+/* Le poème */
+.code-sorcier .texte-poeme {
+  white-space: pre-line;
+  text-align: center;
+  margin-top: 15px; /* Petit espace entre le titre et le poème */
+}
+
+/* Conteneur principal sous forme de grille à 2 colonnes */
+.grille-savoirs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Style de chaque encadré individuel (effet "Rituel") */
+.carte-savoir {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(197, 168, 128, 0.15);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+/* Force le Code de la Peur à prendre toute la largeur en bas */
+.carte-large {
+  grid-column: span 2;
+}
+
+/* RETOUR À LA LIGNE SPÉCIFIQUE POUR LE CODE DE LA PEUR */
+.bloc-peur p {
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* Titres à l'intérieur des blocs */
+.carte-savoir h5 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Contenu textuel */
+.carte-savoir p {
+  margin: 0;
+  font-size: 0.95em;
+  color: #bfae96;
+  line-height: 1.5;
+}
+
+/* Alternance automatique des couleurs des titres */
+.carte-savoir:nth-child(odd) h5 {
+  color: #e49c3e; /* Premier doré */
+}
+.carte-savoir:nth-child(even) h5 {
+  color: #e49c3e; /* Deuxième doré */
+}
+
+/* RETOUR À LA LIGNE ET CENTRAGE POUR LE CODE DE LA PEUR */
+/* Centre tout le contenu de l'encadré du Code de la Peur */
+.bloc-peur {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre horizontalement le titre et le paragraphe */
+  text-align: center; /* Aligne le texte au centre */
+}
+
+/* Applique le centrage et retire les marges parasites du paragraphe */
+.bloc-peur p {
+  white-space: pre-line;
+  line-height: 1.6;
+  text-align: center;
+  width: 100%;
+}
+
+/* Adaptation Mobile */
+@media (max-width: 768px) {
+  .grille-savoirs {
+    grid-template-columns: 1fr;
+  }
+  .carte-large {
+    grid-column: span 1;
+  }
+}
