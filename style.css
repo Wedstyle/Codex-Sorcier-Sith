@@ -104,7 +104,7 @@ h2 {
   gap: 10px;
   max-width: var(--prose-width);
   margin: 48px auto 16px auto;
-  font-size: 1.4rem;
+  font-size: clamp(1.15rem, 2.5vw + 0.7rem, 1.4rem);
   font-weight: 700;
 }
 
@@ -202,7 +202,7 @@ a:hover {
 .title1 {
   max-width: var(--prose-width);
   margin: 0 auto 4px auto;
-  font-size: 2.5rem;
+  font-size: clamp(1.6rem, 5vw + 0.8rem, 2.5rem);
   font-weight: 800;
   line-height: 1.15;
 }
@@ -360,7 +360,7 @@ a:hover {
    -------------------------------------------------------------------------- */
 .grille-savoirs {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 10px;
   max-width: var(--grid-width);
   margin: 20px auto 0 auto;
@@ -493,7 +493,7 @@ a:hover {
 
 .aspects-sith ul {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 8px;
   max-width: var(--grid-width);
   margin: 16px auto 32px auto;
@@ -584,31 +584,102 @@ button:focus-visible {
   }
 }
 
-@media (max-width: 768px) {
+/* --- Grand écran (>1400px) : on laisse un peu plus d'air autour de la
+       colonne centrale plutôt que d'étirer le contenu --- */
+@media (min-width: 1400px) {
   .main-content {
-    padding: 116px 16px 60px 16px;
-  }
-  .title1 {
-    font-size: 2rem;
-  }
-  .grille-savoirs {
-    grid-template-columns: 1fr 1fr;
-  }
-  .aspects-sith ul {
-    grid-template-columns: 1fr 1fr;
-  }
-  .menuNav {
-    justify-content: flex-start;
-    overflow-x: auto;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 }
 
+/* --- Tablette (≤ 860px) --- */
+@media (max-width: 860px) {
+  .main-content {
+    padding-top: 104px;
+  }
+  .divDefinition,
+  .jedi-noirs,
+  .figures-sith,
+  .creatures-sith,
+  .spheres {
+    gap: 14px;
+  }
+}
+
+/* --- Petite tablette / grand téléphone en paysage (≤ 700px) --- */
+@media (max-width: 700px) {
+  .main-content {
+    padding-top: 96px;
+  }
+
+  /* Le menu passe en défilement horizontal plutôt qu'en retour à la
+     ligne, pour ne pas pousser tout le contenu vers le bas */
+  .menuNav {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .liNav a {
+    flex-shrink: 0;
+  }
+
+  /* La grille 2×2 des rituels/sorts (avec l'astuce colonne pour aligner
+     les rangées) redevient une simple colonne empilée dans l'ordre du
+     HTML : plus besoin de deux colonnes indépendantes sur petit écran */
+  .rituels,
+  .sorts-sith {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+}
+
+/* --- Téléphone (≤ 480px) --- */
 @media (max-width: 480px) {
+  .main-content {
+    padding: 88px 16px 48px 16px;
+  }
+
+  .photoEinhar {
+    width: 140px;
+  }
+
+  .code-sorcier,
+  .devise-sorciers {
+    padding: 20px;
+  }
+
+  .divDefinition,
+  .jedi-noirs,
+  .figures-sith,
+  .creatures-sith,
+  .spheres,
+  .rituels,
+  .sorts-sith,
   .grille-savoirs,
   .aspects-sith ul {
-    grid-template-columns: 1fr;
+    gap: 10px;
   }
-  .carte-large {
-    grid-column: 1;
+}
+
+/* --- Petit téléphone (≤ 380px) --- */
+@media (max-width: 380px) {
+  .main-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .liNav a {
+    padding: 6px 9px;
+    font-size: 0.8rem;
+  }
+  .code-sorcier,
+  .devise-sorciers,
+  .pair,
+  .role,
+  .carte-savoir {
+    padding: 14px;
   }
 }
