@@ -23,7 +23,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap");
 
-
 /* --------------------------------------------------------------------------
    1. VARIABLES
    -------------------------------------------------------------------------- */
@@ -37,9 +36,9 @@
   --text-muted: #aba3a7;
   --text-faint: #756e76;
 
-  --accent: #d1323f;    /* rouge sith */
-  --accent-2: #8c2f39;  /* bordeaux sombre — plus de bleu */
-  --accent-3: #d0954a;  /* ambre */
+  --accent: #d1323f; /* rouge sith */
+  --accent-2: #8c2f39; /* bordeaux sombre — plus de bleu */
+  --accent-3: #d0954a; /* ambre */
 
   --font-display: "Archivo", sans-serif;
   --font-body: "Source Sans 3", sans-serif;
@@ -48,7 +47,6 @@
   --grid-width: 1040px;
   --radius: 10px;
 }
-
 
 /* --------------------------------------------------------------------------
    2. BASE
@@ -81,18 +79,22 @@ body {
   color: var(--text);
 }
 
-
 /* --------------------------------------------------------------------------
    3. TYPOGRAPHIE & TITRES
    -------------------------------------------------------------------------- */
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
   font-family: var(--font-display);
   color: var(--text);
 }
 
 /* Les ancres de navigation (#definition, #spheres...) ne doivent pas
    se retrouver cachées sous la navbar fixe quand on clique un lien */
-h1[id], h2[id] {
+h1[id],
+h2[id] {
   scroll-margin-top: 84px;
 }
 
@@ -145,7 +147,6 @@ a:hover {
   text-decoration-color: var(--accent);
 }
 
-
 /* --------------------------------------------------------------------------
    4. NAVIGATION
    -------------------------------------------------------------------------- */
@@ -184,7 +185,9 @@ a:hover {
   text-decoration: none;
   border-radius: 999px;
   white-space: nowrap;
-  transition: color 0.15s ease, background-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .liNav a:hover,
@@ -192,7 +195,6 @@ a:hover {
   color: var(--accent);
   background-color: var(--surface-alt);
 }
-
 
 /* --------------------------------------------------------------------------
    5. EN-TÊTE DE PAGE
@@ -224,7 +226,6 @@ a:hover {
   border: 1px solid var(--border);
   border-radius: var(--radius);
 }
-
 
 /* --------------------------------------------------------------------------
    6. DEVISE & CODE DES SORCIERS
@@ -279,7 +280,6 @@ a:hover {
   font-weight: 600;
 }
 
-
 /* --------------------------------------------------------------------------
    7. CARACTÉRISTIQUES & RÔLES
    -------------------------------------------------------------------------- */
@@ -326,7 +326,6 @@ a:hover {
   color: var(--accent-3);
 }
 
-
 /* --------------------------------------------------------------------------
    8. DÉFINITIONS (paires)
    -------------------------------------------------------------------------- */
@@ -355,7 +354,6 @@ a:hover {
   max-width: none;
   margin-bottom: 0;
 }
-
 
 /* --------------------------------------------------------------------------
    9. GRILLE DE CONNAISSANCES — 3 couleurs = repère visuel, pas déco
@@ -411,7 +409,6 @@ a:hover {
   font-style: italic;
   color: var(--text);
 }
-
 
 /* --------------------------------------------------------------------------
    10. SPHÈRES / RITUELS / SORTS
@@ -481,7 +478,6 @@ a:hover {
   margin-bottom: 2px;
 }
 
-
 /* --------------------------------------------------------------------------
    11. MAGIE SITH
    -------------------------------------------------------------------------- */
@@ -514,7 +510,6 @@ a:hover {
   text-align: center;
   color: var(--text-muted);
 }
-
 
 /* --------------------------------------------------------------------------
    12. JEDI NOIRS / FIGURES / CRÉATURES
@@ -569,7 +564,6 @@ a:hover {
   margin: 0;
   font-size: 0.92rem;
 }
-
 
 /* --------------------------------------------------------------------------
    13. ACCESSIBILITÉ & RESPONSIVE
@@ -785,7 +779,9 @@ button:focus-visible {
   .reveal {
     opacity: 0;
     transform: translateY(14px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
   }
 
   .reveal.is-visible {
@@ -800,4 +796,47 @@ button:focus-visible {
 .figure[id],
 .jedi-noir[id] {
   scroll-margin-top: 84px;
+}
+
+/* Écrase le système d'alignement à gauche du bloc principal */
+main,
+#content,
+.container,
+body > div:not(.navbar) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important; /* Centre tout horizontalement */
+  text-align: center !important;
+}
+
+/* Force le titre à occuper toute la largeur pour être bien au milieu */
+h1 {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+/* Force l'élément "Par Zalakar" et l'image à se centrer, peu importe leur balise */
+h1 + *,
+h1 + * + *,
+img,
+picture,
+[class*="zalakar" i] {
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: block !important;
+  text-align: center !important;
+}
+/* Supprime le trait rouge (si c'est une bordure ou un élément généré) */
+h1 + *,
+h1 + * + *,
+[class*="zalakar" i] {
+  border-left: none !important;
+  padding-left: 0 !important;
+}
+
+h1 + *::before,
+h1 + * + *::before,
+[class*="zalakar" i]::before {
+  content: none !important;
+  display: none !important;
 }
