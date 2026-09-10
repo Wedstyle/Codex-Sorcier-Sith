@@ -1,47 +1,99 @@
-// Ajoute un écouteur d'événements sur le défilement
-window.addEventListener("scroll", function () {
-  var navbar = document.querySelector(".navbar");
-  if (window.scrollY > 50) {
-    // Si la page est défilée de plus de 50px
-    navbar.classList.add("scrolled"); // Ajoute la classe scrolled
-  } else {
-    navbar.classList.remove("scrolled"); // Supprime la classe scrolled
-  }
+/* ==========================================================================
+   CODEX SORCIER SITH — comportements interactifs
+   ==========================================================================
+   1. Fil d'Ariane actif au scroll (scrollspy)
+   2. Apparition des cartes au scroll
+   ========================================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+  initScrollspy();
+  initRevealOnScroll();
 });
 
-// Sélectionner tous les liens de la navbar
-const navLinks = document.querySelectorAll(".navbar .liNav a");
 
-// Ajouter un événement de clic pour chaque lien
-navLinks.forEach((link) => {
-  link.addEventListener("click", function (e) {
-    const href = link.getAttribute("href");
+/* --------------------------------------------------------------------------
+   1. SCROLLSPY — surligne le lien de nav correspondant à la section visible
+   -------------------------------------------------------------------------- */
+function initScrollspy() {
+  const sections = Array.from(document.querySelectorAll("h1[id], h2[id]"));
+  const navLinks = Array.from(
+    document.querySelectorAll('.menuNav a[href^="#"], .toc-sidebar a[href^="#"]')
+  );
 
-    // Si le lien est interne (commence par #), alors on empêche le comportement par défaut
-    if (href.startsWith("#")) {
-      e.preventDefault();
+  if (!sections.length || !navLinks.length) return;
 
-      const targetSection = document.querySelector(href);
-
-      if (targetSection) {
-        const targetPosition = targetSection.offsetTop;
-
-        window.scrollTo({
-          top: targetPosition - 100,
-          behavior: "smooth",
-        });
-      }
-    }
-    // Sinon, c'est un lien vers une autre page — laisser le comportement normal
+  const linksByTarget = new Map();
+  navLinks.forEach((link) => {
+    const id = link.getAttribute("href").slice(1);
+    if (!linksByTarget.has(id)) linksByTarget.set(id, []);
+    linksByTarget.get(id).push(link);
   });
-});
-document.addEventListener("contextmenu", function (e) {
-  e.preventDefault();
-});
 
-document.addEventListener("keydown", function (e) {
-  if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
-    e.preventDefault();
-    alert("L'accès à la console développeur est désactivé.");
-  }
-});
+  const setActive = (id) => {
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      link.removeAttribute("aria-current");
+    });
+    const active = linksByTarget.get(id);
+    if (active) {
+      active.forEach((link) => {
+        link.classList.add("active");
+        link.setAttribute("aria-current", "page");
+      });
+    }
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      // On prend la section la plus haute actuellement visible
+      const visible = entries
+        .filter((e) => e.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+      if (visible.length > 0) {
+        setActive(visible[0].target.id);
+      }
+    },
+    {
+      // Bande de détection sous la navbar fixe, sur le premier tiers de l'écran
+      rootMargin: "-90px 0px -70% 0px",
+      threshold: 0,
+    }
+  );
+
+  sections.forEach((section) => observer.observe(section));
+}
+
+
+/* --------------------------------------------------------------------------
+   2. APPARITION DES CARTES AU SCROLL
+   -------------------------------------------------------------------------- */
+function initRevealOnScroll() {
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  // Si l'utilisateur préfère moins d'animations, tout reste visible tel quel
+  if (prefersReducedMotion) return;
+
+  const targets = document.querySelectorAll(
+    ".pair, .role, .sphere, .rituel, .sort, .jedi-noir, .figure, .creature, .carte-savoir"
+  );
+  if (!targets.length) return;
+
+  targets.forEach((el) => el.classList.add("reveal"));
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          obs.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  targets.forEach((el) => observer.observe(el));
+}

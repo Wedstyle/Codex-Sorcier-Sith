@@ -68,6 +68,55 @@ h2::before {
   border-radius: 4px;
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  /* Supprime le centrage précédent */
+  left: 10%; /* Ajustez ce pourcentage (ex: 2%, 5%, 10%) pour aligner pile en face du début de votre texte */
+  transform: none;
+
+  width: max-content;
+  padding: 6px 20px;
+  background-color: rgba(18, 16, 20, 0.94);
+  border: 1px solid var(--border);
+  border-radius: 0 0 8px 8px;
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+
+.menuNav {
+  display: flex;
+  justify-content: flex-start; /* Aligne le contenu de la nav à gauche */
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.liNav {
+  list-style: none;
+}
+
+.liNav a {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.liNav a:hover,
+.liNav a:focus-visible {
+  color: var(--accent);
+  background-color: var(--surface-alt);
+}
+
 /* Mise en avant simple des mots importants (Sans aucun fond coloré ni lueur) */
 strong {
   color: #b91c1c; /* Rouge mat fixe */
