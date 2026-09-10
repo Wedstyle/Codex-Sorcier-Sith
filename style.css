@@ -1,490 +1,614 @@
-/* ================================
-   FONTS & BASE
-   ================================ */
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Merriweather:wght@300;400;700&display=swap");
+/* ==========================================================================
+   CODEX SORCIER SITH — feuille de style
+   ==========================================================================
+   Construit sur la structure réelle de index.html. Fond clair, cartes
+   nettes par catégorie, hiérarchie typographique claire : priorité à ce
+   qu'un nouveau joueur trouve et comprenne l'info vite.
+
+   SOMMAIRE
+   1. Variables
+   2. Base
+   3. Typographie & titres
+   4. Navigation
+   5. En-tête de page (titre, sous-titre, portrait, intro)
+   6. Devise & Code des Sorciers
+   7. Caractéristiques & Rôles
+   8. Définitions (paires)
+   9. Grille de connaissances
+   10. Sphères / Rituels / Sorts
+   11. Magie Sith (définition, aspects, alchimie)
+   12. Jedi Noirs / Figures / Créatures
+   13. Accessibilité & responsive
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap");
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES
+   -------------------------------------------------------------------------- */
+:root {
+  --bg: #121014;
+  --surface: #1c191d;
+  --surface-alt: #242024;
+  --border: #35303a;
+
+  --text: #ece9ea;
+  --text-muted: #aba3a7;
+  --text-faint: #756e76;
+
+  --accent: #d1323f; /* rouge sith */
+  --accent-2: #8c2f39; /* bordeaux sombre — plus de bleu */
+  --accent-3: #d0954a; /* ambre */
+
+  --font-display: "Archivo", sans-serif;
+  --font-body: "Source Sans 3", sans-serif;
+
+  --prose-width: 720px;
+  --grid-width: 1040px;
+  --radius: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   2. BASE
+   -------------------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
-  padding: 0;
-  background-color: #0b0b0b;
-  background-image: url("https://www.transparenttextures.com/patterns/dark-denim-3.png"); /* texture sombre */
-  font-family: "Merriweather", serif;
-  color: #e0d6c8;
-  text-align: center;
-  line-height: 1.7;
-  padding-top: 80px;
-  user-select: none;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.65;
 }
 
-/* ================================
-   TITRES (style Codex ancien)
-   ================================ */
+.main-content {
+  max-width: var(--grid-width);
+  margin: 0 auto;
+  padding: 88px 24px 100px 24px;
+}
+
+::selection {
+  background: rgba(209, 50, 63, 0.3);
+  color: var(--text);
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAPHIE & TITRES
+   -------------------------------------------------------------------------- */
+h1,
 h2,
-h3 {
-  font-family: "Cinzel Decorative", serif;
-  color: #c9a34e; /* doré ancien */
-  text-shadow: 0 0 8px rgba(201, 163, 78, 0.6);
-  margin: 0 0 25px 0;
+h3,
+h4,
+h5 {
+  font-family: var(--font-display);
+  color: var(--text);
+}
+
+/* Les ancres de navigation (#definition, #spheres...) ne doivent pas
+   se retrouver cachées sous la navbar fixe quand on clique un lien */
+h1[id],
+h2[id] {
+  scroll-margin-top: 84px;
 }
 
 h2 {
-  font-size: 2.4em;
-  border-bottom: 2px solid rgba(201, 163, 78, 0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  max-width: var(--prose-width);
+  margin: 48px auto 16px auto;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+h2::before {
+  content: "";
   display: inline-block;
-  padding-bottom: 6px;
+  width: 18px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent);
+  flex-shrink: 0;
 }
 
 h3 {
-  font-size: 1.7em;
-  color: #b94a2f; /* rouge fané */
+  margin: 0 0 8px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
 }
 
-/* ================================
-   NAVBAR (bandeau codex)
-   ================================ */
+p {
+  max-width: var(--prose-width);
+  margin: 0 auto 16px auto;
+  color: var(--text-muted);
+}
+
+strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(155, 28, 46, 0.35);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* --------------------------------------------------------------------------
+   4. NAVIGATION
+   -------------------------------------------------------------------------- */
 .navbar {
-  all: unset;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  padding: 14px 0;
-  background-color: rgba(15, 15, 15, 0.95);
-  border-bottom: 4px double #5a1d12;
-  z-index: 1000;
+  padding: 12px 20px;
+  background-color: rgba(18, 16, 20, 0.94);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(8px);
+  z-index: 100;
 }
 
 .menuNav {
-  all: unset;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 25px;
 }
 
 .liNav {
-  all: unset;
+  list-style: none;
 }
 
 .liNav a {
-  all: unset;
-  font-family: "Cinzel Decorative", serif;
-  font-size: 1.1em;
-  color: #c9a34e;
-  letter-spacing: 1px;
-  cursor: pointer;
-  padding: 6px 14px;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 999px;
+  white-space: nowrap;
   transition:
-    color 0.3s ease,
-    text-shadow 0.3s ease;
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 
-.liNav a:hover {
-  color: #fff;
-  text-shadow: 0 0 12px #b94a2f;
+.liNav a:hover,
+.liNav a:focus-visible {
+  color: var(--accent);
+  background-color: var(--surface-alt);
 }
 
-/* ================================
-   SECTIONS
-   ================================ */
-section {
-  border-top: 2px dashed rgba(185, 74, 47, 0.5);
-  padding: 50px 20px;
-  margin-top: 40px;
-}
-
-section:first-of-type {
-  border-top: none;
-}
-
-/* ================================
-   BLOCS (pages de codex)
-   ================================ */
-div[class*="-sorcier"],
-div[class*="-sith"],
-div[class*="-spheres"],
-div[class*="pair"] {
-  background-color: rgba(25, 25, 25, 0.95);
-  border: 1px solid rgba(201, 163, 78, 0.4);
-  border-radius: 6px;
-  box-shadow:
-    inset 0 0 20px rgba(201, 163, 78, 0.15),
-    0 0 20px rgba(0, 0, 0, 0.8);
-  padding: 25px;
-  margin: 30px auto;
-  width: 80%;
-  transition: box-shadow 0.4s ease;
-}
-
-div[class*="-sorcier"]:hover,
-div[class*="-sith"]:hover,
-div[class*="-spheres"]:hover,
-div[class*="pair"]:hover {
-  box-shadow:
-    inset 0 0 25px rgba(185, 74, 47, 0.4),
-    0 0 25px rgba(201, 163, 78, 0.6);
-}
-
-/* ================================
-   LISTES & TEXTES
-   ================================ */
-ul,
-p {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  font-size: 1.15em;
-  color: #ddd4c8;
-}
-
-li,
-.defSorcier,
-.tenues-sorciers {
-  margin: 14px 0;
-  padding: 12px;
-  background-color: rgba(40, 20, 20, 0.7);
-  border-left: 5px solid #b94a2f;
-  font-style: italic;
-  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
-  transition:
-    background-color 0.3s ease,
-    transform 0.3s ease;
-}
-
-li:hover,
-.defSorcier:hover,
-.tenues-sorciers:hover {
-  background-color: rgba(60, 25, 25, 0.8);
-  transform: translateX(5px);
-}
-
-/* ================================
-   FLEX SECTIONS
-   ================================ */
-.spheres,
-.rituels,
-.sorts-sith {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 25px;
-  background-color: rgba(15, 15, 15, 0.85);
-  border: 1px solid rgba(201, 163, 78, 0.3);
-  border-radius: 8px;
-  padding: 20px;
-  margin-top: 30px;
-  box-shadow: inset 0 0 15px rgba(185, 74, 47, 0.3);
-}
-
-/* ================================
-   RITUELS & SORTS
-   ================================ */
-.rituel,
-.sort {
-  background-color: rgba(20, 20, 20, 0.95);
-  border: 1px solid rgba(201, 163, 78, 0.3);
-  border-radius: 6px;
-  box-shadow: inset 0 0 20px rgba(185, 74, 47, 0.2);
-  padding: 20px;
-  flex: 1 1 320px;
-  max-width: 650px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: box-shadow 0.3s ease;
-}
-
-.rituel:hover,
-.sort:hover {
-  box-shadow: inset 0 0 25px rgba(201, 163, 78, 0.5);
-}
-
-.rituel h3,
-.sort h3 {
-  margin: 0 0 12px 0;
-  font-size: 1.5em;
-  text-align: center;
-}
-
-.rituel p,
-.sort p {
-  margin: 0 0 12px 0;
-  font-size: 1em;
-  color: #cbbba0;
-  text-align: justify;
-  flex-grow: 1;
-  line-height: 1.6;
-}
-
-/* ================================
-   RESPONSIVE
-   ================================ */
-@media (max-width: 768px) {
-  .navbar .liNav a {
-    font-size: 1em;
-    padding: 6px 12px;
-  }
-
-  h2 {
-    font-size: 2em;
-  }
-  h3 {
-    font-size: 1.4em;
-  }
-
-  div[class*="-sorcier"],
-  div[class*="-sith"],
-  div[class*="-spheres"],
-  div[class*="pair"] {
-    width: 90%;
-  }
-
-  .spheres,
-  .rituels,
-  .sorts-sith {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar .liNav a {
-    font-size: 0.9em;
-    padding: 5px 10px;
-  }
-
-  h2 {
-    font-size: 1.7em;
-  }
-  h3 {
-    font-size: 1.3em;
-  }
-
-  div[class*="-sorcier"],
-  div[class*="-sith"],
-  div[class*="-spheres"],
-  div[class*="pair"] {
-    width: 95%;
-  }
-}
-/* ================================
-   CENTRHAGE DU BLOC D'ACCUEIL
-   ================================ */
-.main-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Aligne tout parfaitement au centre horizontalement */
-  justify-content: center;
-  width: 100%;
-}
-
+/* --------------------------------------------------------------------------
+   5. EN-TÊTE DE PAGE
+   -------------------------------------------------------------------------- */
 .title1 {
-  font-family: "Cinzel Decorative", serif;
-  font-size: 3em;
-  color: #b94a2f; /* Rouge Sith */
-  text-shadow: 0 0 10px rgba(185, 74, 47, 0.6);
-  margin-top: 40px;
-  margin-bottom: 10px;
-  width: 100%;
-  text-align: center;
+  max-width: var(--prose-width);
+  margin: 0 auto 4px auto;
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.15;
 }
 
 .title2 {
-  font-size: 1.8em;
-  margin-top: 0;
-  margin-bottom: 30px;
-  border-bottom: 2px solid rgba(201, 163, 78, 0.4);
-  padding-bottom: 10px;
-  display: inline-block;
+  max-width: var(--prose-width);
+  margin: 0 auto 24px auto;
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-family: var(--font-body);
+  color: var(--text-muted);
 }
 
 .photoEinhar {
   display: block;
-  margin: 0 auto 20px auto; /* Centre l'image et ajoute de l'espace en dessous */
-  max-width: 26%;
+  width: 180px;
   height: auto;
-  border-radius: 8px; /* Optionnel : arrondit un peu les angles de la photo */
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Optionnel : ajoute une ombre sous la photo */
+  margin: 0 0 24px 0;
+  padding: 5px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
 }
 
-/* Container principal imitant le salon de discussion */
-.chat-container {
-  background-color: #313338; /* Couleur de fond Discord Dark */
-  padding: 16px;
-  font-family: "GG Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  color: #dbdee1;
-  display: flex;
-  gap: 16px;
-  max-width: 600px;
-  border-radius: 8px;
+/* --------------------------------------------------------------------------
+   6. DEVISE & CODE DES SORCIERS
+   -------------------------------------------------------------------------- */
+.devise-sorciers {
+  max-width: var(--prose-width);
+  margin: 28px auto;
+  padding: 20px 24px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-3);
+  border-radius: var(--radius);
+  text-align: center;
 }
 
-/* Avatar de l'utilisateur (cercle à gauche) */
-.chat-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    #00b0f4,
-    #005f9e
-  ); /* Simule l'image de profil */
-  flex-shrink: 0;
+.devise-sorciers h2 {
+  margin-top: 0;
 }
 
-/* Contenu du message */
-.chat-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.devise-sorciers p {
+  font-style: italic;
 }
 
-/* Ligne d'en-tête (Pseudo + Badge + Heure) */
-.chat-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
+.code-sorcier {
+  max-width: var(--prose-width);
+  margin: 28px auto;
+  padding: 28px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+  text-align: center;
 }
 
-.chat-author {
-  color: #f23f43; /* Rouge pour le nom Darwin */
+.code-sorcier h2 {
+  margin-top: 0;
+}
+
+.texte-poeme {
+  white-space: pre-line;
+  max-width: 480px;
+  margin: 0 auto 16px auto;
+  color: var(--text);
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.signature {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--accent-3);
   font-weight: 600;
 }
 
-.chat-badge {
-  background-color: #2b2d31;
-  color: #f2f3f5;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-weight: bold;
+/* --------------------------------------------------------------------------
+   7. CARACTÉRISTIQUES & RÔLES
+   -------------------------------------------------------------------------- */
+.caracteristiques-sorcier {
+  max-width: var(--prose-width);
+  margin: 28px auto;
+}
+
+.caracteristiques-sorcier ul {
   display: flex;
-  align-items: center;
-  gap: 4px;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: none;
+  margin: 12px auto 0 auto;
+  padding: 0;
+  list-style: none;
 }
 
-.chat-time {
-  color: #949ba4;
-  font-size: 12px;
+.caracteristiques-sorcier li {
+  padding: 6px 14px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--accent);
 }
 
-/* Le texte du poème avec les retours à la ligne respectés */
-.chat-text {
-  font-size: 16px;
-  line-height: 1.5;
-  white-space: pre-line; /* Respecte fidèlement les sauts de ligne */
-  color: #dbdee1;
-  margin: 0;
+.roles-sorcier {
+  max-width: var(--prose-width);
+  margin: 28px auto;
 }
 
-/* Le conteneur principal */
-.code-sorcier {
-  position: relative; /* Indispensable pour la signature en bas à droite */
-  min-height: 350px; /* Ajustez cette hauteur selon la taille actuelle de votre bloc */
-
-  /* Activation du centrage vertical automatique */
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Centre verticalement le titre et le poème */
-  align-items: center; /* Centre horizontalement le titre et le poème */
-
-  padding: 40px 20px; /* Espace interne pour respirer */
-  box-sizing: border-box;
+.role {
+  padding: 18px 0;
+  border-top: 1px solid var(--border);
 }
 
-/* Le poème */
-.code-sorcier .texte-poeme {
-  white-space: pre-line;
-  text-align: center;
-  margin-top: 15px; /* Petit espace entre le titre et le poème */
+.role:first-of-type {
+  border-top: none;
 }
 
-/* Conteneur principal sous forme de grille à 2 colonnes */
+.role h3 {
+  color: var(--accent-3);
+}
+
+/* --------------------------------------------------------------------------
+   8. DÉFINITIONS (paires)
+   -------------------------------------------------------------------------- */
+.divDefinition {
+  max-width: var(--grid-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.pair {
+  padding: 22px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.pair h3 {
+  color: var(--accent);
+}
+
+.pair p,
+.defSorcier {
+  max-width: none;
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. GRILLE DE CONNAISSANCES — 3 couleurs = repère visuel, pas déco
+   -------------------------------------------------------------------------- */
 .grille-savoirs {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  width: 100%;
-  max-width: 1000px;
-  margin: 20px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-width: var(--grid-width);
+  margin: 20px auto 0 auto;
 }
 
-/* Style de chaque encadré individuel (effet "Rituel") */
 .carte-savoir {
-  background: rgba(20, 20, 20, 0.6);
-  border: 1px solid rgba(197, 168, 128, 0.15);
-  border-radius: 6px;
-  padding: 16px;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  text-align: left;
+  padding: 14px 16px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
 }
 
-/* Force le Code de la Peur à prendre toute la largeur en bas */
-.carte-large {
-  grid-column: span 2;
+.carte-savoir:nth-child(even) {
+  border-left-color: var(--accent-3);
 }
 
-/* RETOUR À LA LIGNE SPÉCIFIQUE POUR LE CODE DE LA PEUR */
-.bloc-peur p {
-  white-space: pre-line;
-  line-height: 1.6;
-}
-
-/* Titres à l'intérieur des blocs */
 .carte-savoir h5 {
-  margin: 0;
-  font-size: 1.1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin: 0 0 4px 0;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text);
 }
 
-/* Contenu textuel */
 .carte-savoir p {
+  max-width: none;
   margin: 0;
-  font-size: 0.95em;
-  color: #bfae96;
-  line-height: 1.5;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  display: inline;
 }
 
-/* Alternance automatique des couleurs des titres */
-.carte-savoir:nth-child(odd) h5 {
-  color: #e49c3e; /* Premier doré */
-}
-.carte-savoir:nth-child(even) h5 {
-  color: #e49c3e; /* Deuxième doré */
+.carte-large {
+  grid-column: 1 / -1;
+  border-left-color: var(--accent);
 }
 
-/* RETOUR À LA LIGNE ET CENTRAGE POUR LE CODE DE LA PEUR */
-/* Centre tout le contenu de l'encadré du Code de la Peur */
 .bloc-peur {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centre horizontalement le titre et le paragraphe */
-  text-align: center; /* Aligne le texte au centre */
+  text-align: center;
 }
 
-/* Applique le centrage et retire les marges parasites du paragraphe */
 .bloc-peur p {
   white-space: pre-line;
-  line-height: 1.6;
-  text-align: center;
-  width: 100%;
+  display: block;
+  font-style: italic;
+  color: var(--text);
 }
 
-/* Adaptation Mobile */
+/* --------------------------------------------------------------------------
+   10. SPHÈRES / RITUELS / SORTS
+   -------------------------------------------------------------------------- */
+.tenues-sorciers {
+  max-width: var(--prose-width);
+  margin: 0 auto;
+}
+
+.spheres {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  max-width: var(--grid-width);
+  margin: 20px auto 0 auto;
+}
+
+/* .rituels / .sorts-sith contiennent 2 x .colonne, chacune avec 2 fiches.
+   On neutralise la colonne (display: contents) pour que les 4 fiches
+   deviennent de vraies cellules de la grille : chaque rangée s'aligne
+   alors sur la fiche la plus haute, au lieu que les deux colonnes
+   dérivent indépendamment l'une de l'autre. */
+.rituels,
+.sorts-sith {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-auto-flow: column;
+  gap: 16px;
+  max-width: var(--grid-width);
+  margin: 20px auto 0 auto;
+}
+
+.colonne {
+  display: contents;
+}
+
+.sphere,
+.rituel,
+.sort {
+  padding: 20px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent-2);
+  border-radius: var(--radius);
+}
+
+.sphere h3,
+.rituel h3,
+.sort h3 {
+  color: var(--accent-2);
+}
+
+.sphere p,
+.rituel p,
+.sort p {
+  max-width: none;
+  font-size: 0.95rem;
+}
+
+.sort p:last-child {
+  margin-bottom: 0;
+}
+
+.sort strong {
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   11. MAGIE SITH
+   -------------------------------------------------------------------------- */
+.definition-magie-sith,
+.subcategorie-magie-sith {
+  max-width: var(--prose-width);
+  margin: 0 auto;
+}
+
+.definition-magie-sith h2 {
+  margin-top: 0;
+}
+
+.aspects-sith ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  max-width: var(--grid-width);
+  margin: 16px auto 32px auto;
+  padding: 0;
+  list-style: none;
+}
+
+.aspects-sith li {
+  padding: 10px 14px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   12. JEDI NOIRS / FIGURES / CRÉATURES
+   -------------------------------------------------------------------------- */
+.jedi-noirs,
+.figures-sith,
+.creatures-sith {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  max-width: var(--grid-width);
+  margin: 20px auto 0 auto;
+}
+
+.jedi-noir,
+.figure,
+.creature {
+  padding: 20px;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent-3);
+  border-radius: var(--radius);
+}
+
+.jedi-noir h3,
+.figure h3,
+.creature h3 {
+  color: var(--accent-3);
+}
+
+.jedi-noir ul,
+.figure ul {
+  max-width: none;
+  margin: 0;
+  padding-left: 18px;
+}
+
+.jedi-noir li,
+.figure li {
+  margin: 4px 0;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+}
+
+.jedi-noir li::marker,
+.figure li::marker {
+  color: var(--accent-3);
+}
+
+.creature p {
+  max-width: none;
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+/* --------------------------------------------------------------------------
+   13. ACCESSIBILITÉ & RESPONSIVE
+   -------------------------------------------------------------------------- */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 @media (max-width: 768px) {
+  .main-content {
+    padding: 116px 16px 60px 16px;
+  }
+  .title1 {
+    font-size: 2rem;
+  }
   .grille-savoirs {
+    grid-template-columns: 1fr 1fr;
+  }
+  .aspects-sith ul {
+    grid-template-columns: 1fr 1fr;
+  }
+  .menuNav {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .grille-savoirs,
+  .aspects-sith ul {
     grid-template-columns: 1fr;
   }
   .carte-large {
-    grid-column: span 1;
+    grid-column: 1;
   }
 }

@@ -1,0 +1,490 @@
+/* ================================
+   FONTS & BASE
+   ================================ */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Merriweather:wght@300;400;700&display=swap");
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0b0b;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-denim-3.png"); /* texture sombre */
+  font-family: "Merriweather", serif;
+  color: #e0d6c8;
+  text-align: center;
+  line-height: 1.7;
+  padding-top: 80px;
+  user-select: none;
+}
+
+/* ================================
+   TITRES (style Codex ancien)
+   ================================ */
+h2,
+h3 {
+  font-family: "Cinzel Decorative", serif;
+  color: #c9a34e; /* doré ancien */
+  text-shadow: 0 0 8px rgba(201, 163, 78, 0.6);
+  margin: 0 0 25px 0;
+}
+
+h2 {
+  font-size: 2.4em;
+  border-bottom: 2px solid rgba(201, 163, 78, 0.4);
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+h3 {
+  font-size: 1.7em;
+  color: #b94a2f; /* rouge fané */
+}
+
+/* ================================
+   NAVBAR (bandeau codex)
+   ================================ */
+.navbar {
+  all: unset;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 14px 0;
+  background-color: rgba(15, 15, 15, 0.95);
+  border-bottom: 4px double #5a1d12;
+  z-index: 1000;
+}
+
+.menuNav {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 25px;
+}
+
+.liNav {
+  all: unset;
+}
+
+.liNav a {
+  all: unset;
+  font-family: "Cinzel Decorative", serif;
+  font-size: 1.1em;
+  color: #c9a34e;
+  letter-spacing: 1px;
+  cursor: pointer;
+  padding: 6px 14px;
+  transition:
+    color 0.3s ease,
+    text-shadow 0.3s ease;
+}
+
+.liNav a:hover {
+  color: #fff;
+  text-shadow: 0 0 12px #b94a2f;
+}
+
+/* ================================
+   SECTIONS
+   ================================ */
+section {
+  border-top: 2px dashed rgba(185, 74, 47, 0.5);
+  padding: 50px 20px;
+  margin-top: 40px;
+}
+
+section:first-of-type {
+  border-top: none;
+}
+
+/* ================================
+   BLOCS (pages de codex)
+   ================================ */
+div[class*="-sorcier"],
+div[class*="-sith"],
+div[class*="-spheres"],
+div[class*="pair"] {
+  background-color: rgba(25, 25, 25, 0.95);
+  border: 1px solid rgba(201, 163, 78, 0.4);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 20px rgba(201, 163, 78, 0.15),
+    0 0 20px rgba(0, 0, 0, 0.8);
+  padding: 25px;
+  margin: 30px auto;
+  width: 80%;
+  transition: box-shadow 0.4s ease;
+}
+
+div[class*="-sorcier"]:hover,
+div[class*="-sith"]:hover,
+div[class*="-spheres"]:hover,
+div[class*="pair"]:hover {
+  box-shadow:
+    inset 0 0 25px rgba(185, 74, 47, 0.4),
+    0 0 25px rgba(201, 163, 78, 0.6);
+}
+
+/* ================================
+   LISTES & TEXTES
+   ================================ */
+ul,
+p {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 1.15em;
+  color: #ddd4c8;
+}
+
+li,
+.defSorcier,
+.tenues-sorciers {
+  margin: 14px 0;
+  padding: 12px;
+  background-color: rgba(40, 20, 20, 0.7);
+  border-left: 5px solid #b94a2f;
+  font-style: italic;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+  transition:
+    background-color 0.3s ease,
+    transform 0.3s ease;
+}
+
+li:hover,
+.defSorcier:hover,
+.tenues-sorciers:hover {
+  background-color: rgba(60, 25, 25, 0.8);
+  transform: translateX(5px);
+}
+
+/* ================================
+   FLEX SECTIONS
+   ================================ */
+.spheres,
+.rituels,
+.sorts-sith {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  background-color: rgba(15, 15, 15, 0.85);
+  border: 1px solid rgba(201, 163, 78, 0.3);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+  box-shadow: inset 0 0 15px rgba(185, 74, 47, 0.3);
+}
+
+/* ================================
+   RITUELS & SORTS
+   ================================ */
+.rituel,
+.sort {
+  background-color: rgba(20, 20, 20, 0.95);
+  border: 1px solid rgba(201, 163, 78, 0.3);
+  border-radius: 6px;
+  box-shadow: inset 0 0 20px rgba(185, 74, 47, 0.2);
+  padding: 20px;
+  flex: 1 1 320px;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
+}
+
+.rituel:hover,
+.sort:hover {
+  box-shadow: inset 0 0 25px rgba(201, 163, 78, 0.5);
+}
+
+.rituel h3,
+.sort h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.rituel p,
+.sort p {
+  margin: 0 0 12px 0;
+  font-size: 1em;
+  color: #cbbba0;
+  text-align: justify;
+  flex-grow: 1;
+  line-height: 1.6;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+@media (max-width: 768px) {
+  .navbar .liNav a {
+    font-size: 1em;
+    padding: 6px 12px;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+  h3 {
+    font-size: 1.4em;
+  }
+
+  div[class*="-sorcier"],
+  div[class*="-sith"],
+  div[class*="-spheres"],
+  div[class*="pair"] {
+    width: 90%;
+  }
+
+  .spheres,
+  .rituels,
+  .sorts-sith {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar .liNav a {
+    font-size: 0.9em;
+    padding: 5px 10px;
+  }
+
+  h2 {
+    font-size: 1.7em;
+  }
+  h3 {
+    font-size: 1.3em;
+  }
+
+  div[class*="-sorcier"],
+  div[class*="-sith"],
+  div[class*="-spheres"],
+  div[class*="pair"] {
+    width: 95%;
+  }
+}
+/* ================================
+   CENTRHAGE DU BLOC D'ACCUEIL
+   ================================ */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Aligne tout parfaitement au centre horizontalement */
+  justify-content: center;
+  width: 100%;
+}
+
+.title1 {
+  font-family: "Cinzel Decorative", serif;
+  font-size: 3em;
+  color: #b94a2f; /* Rouge Sith */
+  text-shadow: 0 0 10px rgba(185, 74, 47, 0.6);
+  margin-top: 40px;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.title2 {
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-bottom: 2px solid rgba(201, 163, 78, 0.4);
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+.photoEinhar {
+  display: block;
+  margin: 0 auto 20px auto; /* Centre l'image et ajoute de l'espace en dessous */
+  max-width: 26%;
+  height: auto;
+  border-radius: 8px; /* Optionnel : arrondit un peu les angles de la photo */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); /* Optionnel : ajoute une ombre sous la photo */
+}
+
+/* Container principal imitant le salon de discussion */
+.chat-container {
+  background-color: #313338; /* Couleur de fond Discord Dark */
+  padding: 16px;
+  font-family: "GG Sans", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: #dbdee1;
+  display: flex;
+  gap: 16px;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+/* Avatar de l'utilisateur (cercle à gauche) */
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    #00b0f4,
+    #005f9e
+  ); /* Simule l'image de profil */
+  flex-shrink: 0;
+}
+
+/* Contenu du message */
+.chat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* Ligne d'en-tête (Pseudo + Badge + Heure) */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.chat-author {
+  color: #f23f43; /* Rouge pour le nom Darwin */
+  font-weight: 600;
+}
+
+.chat-badge {
+  background-color: #2b2d31;
+  color: #f2f3f5;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.chat-time {
+  color: #949ba4;
+  font-size: 12px;
+}
+
+/* Le texte du poème avec les retours à la ligne respectés */
+.chat-text {
+  font-size: 16px;
+  line-height: 1.5;
+  white-space: pre-line; /* Respecte fidèlement les sauts de ligne */
+  color: #dbdee1;
+  margin: 0;
+}
+
+/* Le conteneur principal */
+.code-sorcier {
+  position: relative; /* Indispensable pour la signature en bas à droite */
+  min-height: 350px; /* Ajustez cette hauteur selon la taille actuelle de votre bloc */
+
+  /* Activation du centrage vertical automatique */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre verticalement le titre et le poème */
+  align-items: center; /* Centre horizontalement le titre et le poème */
+
+  padding: 40px 20px; /* Espace interne pour respirer */
+  box-sizing: border-box;
+}
+
+/* Le poème */
+.code-sorcier .texte-poeme {
+  white-space: pre-line;
+  text-align: center;
+  margin-top: 15px; /* Petit espace entre le titre et le poème */
+}
+
+/* Conteneur principal sous forme de grille à 2 colonnes */
+.grille-savoirs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+/* Style de chaque encadré individuel (effet "Rituel") */
+.carte-savoir {
+  background: rgba(20, 20, 20, 0.6);
+  border: 1px solid rgba(197, 168, 128, 0.15);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+/* Force le Code de la Peur à prendre toute la largeur en bas */
+.carte-large {
+  grid-column: span 2;
+}
+
+/* RETOUR À LA LIGNE SPÉCIFIQUE POUR LE CODE DE LA PEUR */
+.bloc-peur p {
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+/* Titres à l'intérieur des blocs */
+.carte-savoir h5 {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Contenu textuel */
+.carte-savoir p {
+  margin: 0;
+  font-size: 0.95em;
+  color: #bfae96;
+  line-height: 1.5;
+}
+
+/* Alternance automatique des couleurs des titres */
+.carte-savoir:nth-child(odd) h5 {
+  color: #e49c3e; /* Premier doré */
+}
+.carte-savoir:nth-child(even) h5 {
+  color: #e49c3e; /* Deuxième doré */
+}
+
+/* RETOUR À LA LIGNE ET CENTRAGE POUR LE CODE DE LA PEUR */
+/* Centre tout le contenu de l'encadré du Code de la Peur */
+.bloc-peur {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre horizontalement le titre et le paragraphe */
+  text-align: center; /* Aligne le texte au centre */
+}
+
+/* Applique le centrage et retire les marges parasites du paragraphe */
+.bloc-peur p {
+  white-space: pre-line;
+  line-height: 1.6;
+  text-align: center;
+  width: 100%;
+}
+
+/* Adaptation Mobile */
+@media (max-width: 768px) {
+  .grille-savoirs {
+    grid-template-columns: 1fr;
+  }
+  .carte-large {
+    grid-column: span 1;
+  }
+}
