@@ -798,45 +798,35 @@ button:focus-visible {
   scroll-margin-top: 84px;
 }
 
-/* Écrase le système d'alignement à gauche du bloc principal */
-main,
-#content,
-.container,
-body > div:not(.navbar) {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important; /* Centre tout horizontalement */
-  text-align: center !important;
-}
+/* ==========================================================================
+   CORRECTIONS CIBLÉES : EN-TÊTE UNIQUEMENT
+   ========================================================================== */
 
-/* Force le titre à occuper toute la largeur pour être bien au milieu */
+/* 1. Centre uniquement les titres principaux du haut de page */
+.title1,
+.title2,
 h1 {
-  width: 100% !important;
   text-align: center !important;
-}
-
-/* Force l'élément "Par Zalakar" et l'image à se centrer, peu importe leur balise */
-h1 + *,
-h1 + * + *,
-img,
-picture,
-[class*="zalakar" i] {
   margin-left: auto !important;
   margin-right: auto !important;
-  display: block !important;
-  text-align: center !important;
-}
-/* Supprime le trait rouge (si c'est une bordure ou un élément généré) */
-h1 + *,
-h1 + * + *,
-[class*="zalakar" i] {
-  border-left: none !important;
-  padding-left: 0 !important;
 }
 
-h1 + *::before,
-h1 + * + *::before,
-[class*="zalakar" i]::before {
-  content: none !important;
+/* 2. Centre le sous-titre de l'auteur et supprime son trait rouge */
+h2.title2,
+h1 + h2 {
+  display: block !important;
+  text-align: center !important;
+  margin: 0 auto 24px auto !important;
+}
+
+/* Désactive spécifiquement le carré rouge pour le nom de l'auteur */
+h2.title2::before,
+h1 + h2::before {
   display: none !important;
+  content: none !important;
+}
+
+/* 3. Centre l'image de Zalakar (classe .photoEinhar de votre feuille de style) */
+.photoEinhar {
+  margin: 0 auto 24px auto !important;
 }
