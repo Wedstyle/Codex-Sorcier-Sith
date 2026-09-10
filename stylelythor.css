@@ -242,3 +242,118 @@ a:hover {
     grid-column: span 1;
   }
 }
+
+/* ==========================================================================
+   INJECTION DE L'HOLOGRAMME AVEC PALET PROJECTEUR (SANS TOUCHER AU HTML)
+   ========================================================================== */
+
+body {
+  position: relative;
+  padding-right: 340px !important;
+  box-sizing: border-box;
+}
+
+/* 1. L'HOLOGRAMME : Le personnage de Darth Lythor qui flotte */
+body::before {
+  content: "" !important;
+  display: block !important;
+  position: fixed !important;
+  top: 140px !important; /* Remonté pour laisser la place au palet en bas */
+  right: 40px !important;
+  width: 280px !important;
+  height: 500px !important;
+  z-index: 9999 !important;
+  pointer-events: none !important;
+
+  background-image: url("img/LHolocom.png") !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center bottom !important;
+
+  opacity: 0.95 !important;
+
+  /* Ombre volumétrique douce */
+  filter: drop-shadow(-5px 5px 8px rgba(0, 176, 244, 0.3))
+    drop-shadow(5px 5px 12px rgba(0, 176, 244, 0.2)) !important;
+
+  /* Animation de lévitation verticale de l'hologramme */
+  animation: levitationHolo 4s ease-in-out infinite !important;
+}
+
+/* 2. LE PROJECTEUR : Le palet technologique circulaire sous ses pieds */
+body::after {
+  content: "" !important;
+  display: block !important;
+  position: fixed !important;
+  top: 610px !important; /* Positionné pile sous les pieds du personnage */
+  right: 70px !important; /* Centré par rapport aux 280px du personnage */
+  width: 220px !important; /* Largeur du palet émetteur */
+  height: 45px !important; /* Hauteur aplatie pour l'effet de perspective ovale */
+  z-index: 9998 !important;
+  pointer-events: none !important;
+
+  /* Rendu mécanique et lueur circulaire (Effet Holocompad) */
+  background: 
+        /* Énergie centrale blanche/bleue */
+    radial-gradient(
+      circle at 50% 30%,
+      #ffffff 0%,
+      rgba(0, 176, 244, 0.8) 25%,
+      transparent 60%
+    ),
+    /* Motif de circuits géométriques croisés imitant votre image */
+    repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 4px,
+        rgba(0, 176, 244, 0.15) 4px,
+        rgba(0, 176, 244, 0.15) 6px
+      ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 4px,
+      rgba(0, 176, 244, 0.15) 4px,
+      rgba(0, 176, 244, 0.15) 6px
+    ),
+    /* Structure métallique sombre du boîtier */
+    linear-gradient(to bottom, #1a1c23 0%, #0d0e12 60%, #050507 100%);
+
+  /* Découpe une ellipse parfaite pour simuler le cercle vu de trois-quarts */
+  border-radius: 50% / 50% !important;
+
+  /* Bordure métallique externe avec encoches lumineuses */
+  border: 3px solid #2a2e3d !important;
+  border-top-color: #00b0f4 !important; /* Liseré d'activation lumineux sur le dessus */
+
+  /* Halo lumineux doux projeté sur le sol et sous le personnage */
+  box-shadow:
+    0 -10px 30px rgba(0, 176, 244, 0.4),
+    /* Faisceau montant */ 0 5px 15px rgba(0, 0, 0, 0.9); /* Ombre au sol */
+}
+
+/* --- ANIMATION DE LÉVITATION SYNCHRONISÉE --- */
+@keyframes levitationHolo {
+  0%,
+  100% {
+    transform: translateY(0);
+    filter: drop-shadow(-5px 5px 8px rgba(0, 176, 244, 0.3)) brightness(95%);
+  }
+  50% {
+    transform: translateY(
+      -8px
+    ); /* L'hologramme monte légèrement pendant que le palet reste au sol */
+    filter: drop-shadow(-8px 12px 14px rgba(0, 176, 244, 0.45)) brightness(105%);
+  }
+}
+
+/* Désactivation propre sur mobile */
+@media (max-width: 950px) {
+  body {
+    padding-right: 0 !important;
+  }
+  body::before,
+  body::after {
+    display: none !important;
+  }
+}
